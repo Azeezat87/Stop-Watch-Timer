@@ -9,13 +9,13 @@ export default function Timer() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer) {
-        if (seconds === 0 && minutes === 0 && hours === 0) {
-          return 0
+        if (seconds <= 0 && minutes <= 0 && hours <= 0) {
+          setTimer(false)
         } else {
           setSeconds((prev) => (prev <= 0 ? 59 : prev - 1))
         }
       }
-    }, 100)
+    }, 1000)
     return () => {
       clearInterval(interval)
     }
@@ -100,8 +100,9 @@ export default function Timer() {
 
   return (
     <section className='bg-white py-6 px-10 rounded-md'>
-      <h1 className='text-4xl text-center font-bold mb-6'>Timer</h1>
+      <h1 className='text-4xl text-center font-bold mb-6 flex flex-col'>Timer</h1>
       {timer ? (
+        <>
         <div className='flex'>
           <div className='text-center'>
             <p className='text-xs text-purple-500 mr-8'>Hours</p>
@@ -123,17 +124,19 @@ export default function Timer() {
             </div>
           </div>
 
-          <div className='text-center'>
-            <p className='text-xs text-purple-500'>Seconds</p>
-            <div className=''>
-              <span className='h-20 w-20 shadow-md shadow-gray-300 rounded-md flex items-center justify-center'>
-                <h3 className='text-5xl font-semibold'>{pad(seconds)}</h3>
-              </span>
+          <div>
+            <div className='text-center'>
+              <p className='text-xs text-purple-500'>Seconds</p>
+              <div className=''>
+                <span className='h-20 w-20 shadow-md shadow-gray-300 rounded-md flex items-center justify-center'>
+                  <h3 className='text-5xl font-semibold'>{pad(seconds)}</h3>
+                </span>
+              </div>
             </div>
           </div>
-          {/* <div className='flex items-center justify-center gap-[65px] mt-5'>
+        </div>
+        <div className='flex items-center justify-center gap-6 mt-5'>
             <Button text='Pause' onClick={() => setTimer(false)} />
-            <Button text='Play' onClick={() => setTimer(true)} />
             <Button
               text='Reset'
               onClick={() => {
@@ -143,8 +146,8 @@ export default function Timer() {
                 setHours(0);
               }}
             />
-          </div> */}
-        </div>
+          </div>
+        </>
       ) : (
         <>
           <div className='flex'>

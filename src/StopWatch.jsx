@@ -9,7 +9,7 @@ export default function StopWatch() {
       if (isPlaying) {
         setWatch(prevWatch => prevWatch + 1)
       }
-    }, 100)
+    }, 1000)
     return () => {
       clearInterval(time)
     }
