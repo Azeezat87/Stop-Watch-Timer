@@ -36,6 +36,7 @@ export default function Timer() {
   useEffect(() => {
     if (seconds === 0 && minutes === 0 && hours === 0) {
       setTimer(false)
+      new Audio('/timer.wav').play()
      }
   }, [seconds, minutes, hours])
 
@@ -100,7 +101,7 @@ export default function Timer() {
 
   return (
     <section className='bg-white py-6 px-10 rounded-md'>
-      <h1 className='text-4xl text-center font-bold mb-6 flex flex-col'>Timer</h1>
+      <h1 className='text-4xl text-center font-bold mb-6 flex flex-col'>Countdown Timer</h1>
       {timer ? (
         <>
         <div className='flex'>
